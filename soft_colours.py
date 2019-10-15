@@ -8,10 +8,10 @@ import math
 
 def run(led_wire, string_length, running_time, sleep_time, transition_steps):
     start_time = time.time()
-    current_colour = list(red)
+    current_colour = list(dim_orange)
 
-    colour_list = [red, orange, dim_yellow, dim_light_green, green,
-                   dim_turquoise, blue, violet, pink]
+    colour_list = [red, dim_orange, dim_yellow, dim_light_green, green,
+                   dim_turquoise, blue, dim_pink]
     while (time.time() - start_time) < running_time:
         new_colour = list(random.choice(colour_list))
         change_per_transition = [0, 0, 0]
@@ -32,9 +32,9 @@ def run(led_wire, string_length, running_time, sleep_time, transition_steps):
                 elif new_colour[i] > current_colour[i]:
                     current_colour[i] += change_per_transition[i]
             # print(current_colour)
-            for i in current_colour:
-                i / 2
-                i = math.floor(i)
+            # for i in current_colour:
+            #     i / 2
+            #     i = math.floor(i)
             for i in range(100):
                 led_wire.setPixelColor(i, Color(current_colour[1],
                                  current_colour[0], current_colour[2]))

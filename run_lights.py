@@ -1,6 +1,7 @@
 from neopixel import *
 from rpi_ws281x import *
 
+import random
 import soft_colours
 import rainbow
 import chase_light
@@ -15,7 +16,7 @@ LED_DMA = 10  # DMA channel to use for generating signal (try 10)
 LED_BRIGHTNESS = 255  # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False  # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
-STRING_LENGTH = 100
+
 
 class RunLights():
 
@@ -26,7 +27,17 @@ class RunLights():
         self.led_wire.show()
 
     def run_light_show(self):
-        soft_colours.run(self.led_wire, STRING_LENGTH, 600, 0.1, 250)
+        while True:
+            next_show = random.randint(0, 2)
+            next_show = 1
+            if next_show == 0:
+                soft_colours.run(self.led_wire, LED_COUNT, 30, 0.05, 200)
+            if next_show == 1:
+                soft_colours.run(self.led_wire, LED_COUNT, 30, 0.005, 200)
+            elif next_show == 2:
+                chase_light.run(self.led_wire, LED_COUNT, 30, 0.05, 10, 1)
+
+            
 
 
 if __name__ == "__main__":
