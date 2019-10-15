@@ -2,6 +2,7 @@ from neopixel import *
 from rpi_ws281x import *
 
 import random
+from default_colours import *
 import soft_colours
 import rainbow
 import chase_light
@@ -27,15 +28,33 @@ class RunLights():
         self.led_wire.show()
 
     def run_light_show(self):
+        colour_list = [white, red, orange, yellow, light_green, green,
+                    turquoise, blue, violet, pink]
         while True:
-            next_show = random.randint(0, 2)
-            next_show = 1
+            next_show = random.randint(0, 5)
+            fast = random.choice((True, False))
+            fast = True
+            next_show = 0
+            if fast:
+                chase_sleep = 0.02
+            else:
+                chase_sleep = 0.08
             if next_show == 0:
-                soft_colours.run(self.led_wire, LED_COUNT, 30, 0.05, 200)
-            if next_show == 1:
-                soft_colours.run(self.led_wire, LED_COUNT, 30, 0.005, 200)
+                if fast:
+                    soft_colours.run(self.led_wire, LED_COUNT, 30, 0.008, 100)
+                else:
+                    soft_colours.run(self.led_wire, LED_COUNT, 30, 0.1, 500)
+            elif next_show == 1:
+                soft_colours.run(self.led_wire, LED_COUNT, 30, 0.05, 50)
             elif next_show == 2:
-                chase_light.run(self.led_wire, LED_COUNT, 30, 0.05, 10, 1)
+                chase_light.run(self.led_wire, LED_COUNT, 30, chase_sleep, 10, 1, "random", reverse=False)
+            elif next_show == 3:
+                chase_light.run(self.led_wire, LED_COUNT, 30, chase_sleep, 10, 1, "random", reverse=True)
+            elif next_show == 4:
+                chase_light.run(self.led_wire, LED_COUNT, 30, chase_sleep, 10, 1, [random.choice(colour_list)], reverse=False)
+            elif next_show == 5:
+                chase_light.run(self.led_wire, LED_COUNT, 30, chase_sleep, 10, 1, [random.choice(colour_list)], reverse=True)
+
 
             
 
