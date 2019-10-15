@@ -8,10 +8,10 @@ import math
 
 def run(led_wire, string_length, running_time, sleep_time, transition_steps):
     start_time = time.time()
-    current_colour = list(dim_orange)
 
     colour_list = [red, dim_orange, dim_yellow, dim_light_green, green,
                    dim_turquoise, blue, dim_pink]
+    current_colour = list(random.choice(colour_list))
     while (time.time() - start_time) < running_time:
         new_colour = list(random.choice(colour_list))
         change_per_transition = [0, 0, 0]
