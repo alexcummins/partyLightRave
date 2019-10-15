@@ -41,7 +41,3 @@ def run(led_wire, string_length, running_time, wait_time, num_chasers):
     for i in range(num_chasers):
         chaser_list.append(Chaser(led_wire, i * chaser_displacement,
                                   1, default_colours.white))
-
-
-
-

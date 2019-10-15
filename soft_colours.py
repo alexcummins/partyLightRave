@@ -6,31 +6,38 @@ import random
 import math
 
 
-def run(led_wire, string_length, running_time, transition_steps):
+def run(led_wire, string_length, running_time, sleep_time, transition_steps):
     start_time = time.time()
     current_colour = list(red)
-    transition_steps = 10
 
-    colour_list = [red, orange, yellow, light_green, green,
-                   turquoise, blue, indigo, violet, pink]
-    while (start_time - time.time()) < running_time:
-        new_colour = random.choice(colour_list)
-        max_colour_diff = 0
+    colour_list = [red, orange, dim_yellow, dim_light_green, green,
+                   dim_turquoise, blue, violet, pink]
+    while (time.time() - start_time) < running_time:
+        new_colour = list(random.choice(colour_list))
         change_per_transition = [0, 0, 0]
 
         for i in range(3):
-            change_per_transition[i] = math.floor(abs(new_colour[i] - colour[i]) / transition_steps)
+            change_per_transition[i] = math.floor(abs(new_colour[i] - current_colour[i]) / transition_steps)
+            if change_per_transition[i] == 0:
+                change_per_transition[i] = 1
+            
+        # print("Change per transition: ", change_per_transition)
 
-        while new_colour != tuple(current_colour):
+        while new_colour != current_colour:
             for i in range(3):
                 if abs(new_colour[i] - current_colour[i]) < change_per_transition[i]:
                     current_colour[i] = new_colour[i]
                 elif new_colour[i] < current_colour[i]:
-                    new_colour[i] += change_per_transition[i]
+                    current_colour[i] -= change_per_transition[i]
                 elif new_colour[i] > current_colour[i]:
-                    new_colour[i] -= change_per_transition[i]
-            led_wire.setPixelColour(1, Color(tuple(current_colour)))
+                    current_colour[i] += change_per_transition[i]
+            # print(current_colour)
+            for i in current_colour:
+                i / 2
+                i = math.floor(i)
+            for i in range(100):
+                led_wire.setPixelColor(i, Color(current_colour[1],
+                                 current_colour[0], current_colour[2]))
             led_wire.show()
-            # add function to set colour of all LEDs HERE
-            time.sleep(0.025)
+            time.sleep(sleep_time)
 
