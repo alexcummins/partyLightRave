@@ -6,7 +6,7 @@ from default_colours import *
 import soft_colours
 import rainbow
 import chase_light
-import pulse
+# import pulse
 
 # LED Wire configuration:
 LED_COUNT = 100  # Number of LED pixels.
