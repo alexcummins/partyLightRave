@@ -33,8 +33,6 @@ class RunLights():
         while True:
             next_show = random.randint(0, 5)
             fast = random.choice((True, False))
-            fast = True
-            next_show = 0
             if fast:
                 chase_sleep = 0.02
             else:
