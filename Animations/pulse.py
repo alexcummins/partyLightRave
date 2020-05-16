@@ -1,15 +1,11 @@
-from neopixel import *
-from rpi_ws281x import *
-from default_colours import *
-import time
-import random
-import math
 
 DIMINISHING_BRIGHTNESS = 0.8
 
+
 def run(led_wire, string_length, running_time, sleep_time, num_pulses, time_between_pulse, colour, staggered):
+    pass
     ## TODO
-    
+
     # start_time = time.time()
 
     # if colour == "random":
@@ -28,12 +24,9 @@ def run(led_wire, string_length, running_time, sleep_time, num_pulses, time_betw
     #             if pulse_start + j > 0 or pulse_start + j < string_length:
     #                 led_wire.setPixelColor(pulse_start - j, Color(current_colour[1],
     #                                     current_colour[0], current_colour[2]))
-                
 
-
-
-            # for i in range(100):
-                # led_wire.setPixelColor(i, Color(current_colour[1],
-                                #  current_colour[0], current_colour[2]))
-            # led_wire.show()
-            # time.sleep(sleep_time)
+    # for i in range(100):
+    # led_wire.setPixelColor(i, Color(current_colour[1],
+    #  current_colour[0], current_colour[2]))
+    # led_wire.show()
+    # time.sleep(sleep_time)
