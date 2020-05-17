@@ -28,27 +28,27 @@ class RunLights:
                 chase_sleep = 0.08
             if next_show == 0:
                 if fast:
-                    SoftColours.run(self.display, self.RUNNING_TIME, 0.008, 100)
+                    SoftColours(self.display, self.RUNNING_TIME, 0.008, 100).run()
                 else:
-                    SoftColours.run(self.display, self.RUNNING_TIME, 0.1, 500)
+                    SoftColours(self.display, self.RUNNING_TIME, 0.1, 500).run()
             elif next_show == 1:
-                SoftColours.run(self.display, self.RUNNING_TIME, 0.05, 50)
+                    SoftColours(self.display, self.RUNNING_TIME, 0.05, 50).run()
             elif next_show == 2:
-                ChaseLight.run(self.display, self.RUNNING_TIME, chase_sleep,
-                               self.CHASER_CHANCE, 1, "random", reverse=False)
+                ChaseLight(self.display, self.RUNNING_TIME, chase_sleep,
+                           self.CHASER_CHANCE, regular=True, colours="random", reverse=False).run()
             elif next_show == 3:
-                ChaseLight.run(self.display, self.RUNNING_TIME, chase_sleep,
-                               self.CHASER_CHANCE, 1, "random", reverse=True)
+                ChaseLight(self.display, self.RUNNING_TIME, chase_sleep,
+                           self.CHASER_CHANCE, regular=True, colours="random", reverse=True).run()
             elif next_show == 4:
-                ChaseLight.run(self.display, self.RUNNING_TIME, chase_sleep,
-                               self.CHASER_CHANCE, 1, [random.choice(all_colours)],
-                               reverse=False)
+                ChaseLight(self.display, self.RUNNING_TIME, chase_sleep,
+                           self.CHASER_CHANCE, regular=True, colours=[random.choice(all_colours)],
+                           reverse=False).run()
             elif next_show == 5:
-                ChaseLight.run(self.display, self.RUNNING_TIME, chase_sleep,
-                               self.CHASER_CHANCE, 1, [random.choice(all_colours)],
-                               reverse=True)
+                ChaseLight(self.display, self.RUNNING_TIME, chase_sleep,
+                           self.CHASER_CHANCE, regular=True, colours=[random.choice(all_colours)],
+                           reverse=True).run()
 
 
 if __name__ == "__main__":
-    runningLights = RunLights(LEDDisplay)
+    runningLights = RunLights(LEDDisplay.LEDDisplay())
     runningLights.run_light_show()

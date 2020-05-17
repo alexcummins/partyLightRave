@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, astuple
 
 
 @dataclass
@@ -6,6 +6,22 @@ class Colour:
     red: int
     green: int
     blue: int
+
+    def __getitem__(self, item) -> int:
+        if item == 0:
+            return self.red
+        elif item == 1:
+            return self.green
+        elif item == 2:
+            return self.blue
+
+    def __setitem__(self, key, value):
+        if key == 0:
+            red = value
+        if key == 1:
+            green = value
+        if key == 2:
+            blue = value
 
 
 # Some default colours, in tuple form RGB

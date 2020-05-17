@@ -1,4 +1,5 @@
 from Animations import Display
+from Animations.animation import Animation
 from Animations.default_colours import *
 import time
 import random
@@ -12,7 +13,7 @@ class Chaser:
     def __init__(self, display: Display, led_num, max_brightness, colour, trailer):
         self.display: Display = display
         self.brightness = max_brightness
-        self.colour = list(colour)
+        self.colour: Colour = colour
         self.led_num = led_num
         self.trailer: Chaser = trailer
 
@@ -54,54 +55,64 @@ class Chaser:
         return self.brightness
 
 
-class ChaseLight:
+class ChaseLight(Animation):
 
-    @staticmethod
-    def run(display: Display, running_time, sleep_time, chaser_chance, regular, colours, reverse):
+    def __init__(self, display: Display, running_time: int, sleep_time: float, chaser_chance: float, regular: bool,
+                 colours, reverse: bool):
+
+        super().__init__(display)
+        self.running_time = running_time
+        self.sleep_time = sleep_time
+        self.chaser_chance = chaser_chance
+        self.regular = regular
+        self.colours = colours
+        self.reverse = reverse
+
+    def run(self):
         # Currently overlapping flashes, need to change
         start_time = time.time()
 
-        if colours == "random":
+        if self.colours == "random":
             colour_list = all_colours
         else:
-            colour_list = colours
+            colour_list = self.colours
 
-        if reverse:
+        if self.reverse:
             next = -1
-            insert_pos = display.get_num_pixels
+            insert_pos = self.display.get_num_pixels()
         else:
             next = 1
             insert_pos = 0
 
         # chaser setup
-        chaser_list = [Chaser(display, insert_pos,
+        chaser_list = [Chaser(self.display, insert_pos,
                               1, random.choice(colour_list), 0)]
         num_steps_gone = 0
 
-        while (time.time() - start_time) < running_time:
+        while (time.time() - start_time) < self.running_time:
             if num_steps_gone > 10:
-                if regular:
-                    chaser_list.append(Chaser(display, insert_pos,
+                if self.regular:
+                    chaser_list.append(Chaser(self.display, insert_pos,
                                               1, random.choice(colour_list), 0))
                 else:
-                    if random.randint(0, 100) <= chaser_chance:
-                        chaser_list.append(Chaser(display, insert_pos,
+                    if random.randint(0, 100) <= self.chaser_chance:
+                        chaser_list.append(Chaser(self.display, insert_pos,
                                                   1, random.choice(colour_list), 0))
                 num_steps_gone = 0
             for chaser in chaser_list:
                 chaser.push_to_led()
                 chaser.divide(1.25)
 
-            display.update()
-            time.sleep(sleep_time)
+            self.display.update()
+            time.sleep(self.sleep_time)
 
             try:
                 for i in range(len(chaser_list)):
-                    if (chaser_list[i].get_led_num() + 1) > display.get_num_pixels() + 10 or (
+                    if (chaser_list[i].get_led_num() + 1) > self.display.get_num_pixels() + 10 or (
                             chaser_list[i].get_led_num() - 1) < -10:
                         del chaser_list[i]
                     else:
-                        chaser_list.insert(0, Chaser(display, chaser_list[i].get_led_num() + next, 1,
+                        chaser_list.insert(0, Chaser(self.display, chaser_list[i].get_led_num() + next, 1,
                                                      chaser_list[i].get_colour(), chaser_list[i]))
                         del chaser_list[i + 1]  # because inserted a new element before
             except IndexError:
