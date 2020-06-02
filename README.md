@@ -16,7 +16,7 @@ Make sure [rpi-ws281x](https://github.com/jgarff/rpi_ws281x) library is installe
 
 In a prototype speaker LED box:
 
-![](partyLightGif.gif)
+![](partyLightsGif.gif)
 
 ## Direction
 
