@@ -20,8 +20,8 @@ In a prototype speaker LED box:
 
 ## Direction
 
-I'm planning on using the interface added to create a GUI/web version so you can 
-try out animations on your computer and not exclusively on RPI.
+I'm planning on using the Display interface added to create a GUI/web version so you can 
+try out animations on your computer and not exclusively on RPI using LEDDisplay.
 
 ## License
 
