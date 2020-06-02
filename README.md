@@ -1,7 +1,7 @@
 # Party Light Rave
 
 A program to create cool light animations on a WS281x LED string run by a Raspberry Pi.
-This project is stilla work in progress, and changes have been made while I haven't had access to my LED grid,
+This project is still a work in progress, and changes have been made while I haven't had access to my LED grid,
 so may not currently work!
 
 ## Getting Started
@@ -20,9 +20,9 @@ In a prototype speaker LED box:
 
 ## Direction
 
-Planning on using the interface added to create a GUI/web version so you can 
+I'm planning on using the interface added to create a GUI/web version so you can 
 try out animations on your computer and not exclusively on RPI.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
